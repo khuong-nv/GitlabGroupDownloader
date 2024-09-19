@@ -1,1 +1,1 @@
-# GitlabGroupDownloader
+# GitlabGroupDownloader, Use for Linux
