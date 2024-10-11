@@ -34,6 +34,7 @@ void GitlabRequest::requestGroups()
 
     QUrlQuery query;
     query.addQueryItem("private_token", m_private_token);
+    query.addQueryItem("per_page", "1000");
     url.setQuery(query);
     QNetworkRequest request(url);
 
@@ -135,14 +136,13 @@ GroupModel *GitlabRequest::model() const
     return m_groupModel;
 }
 
-void GitlabRequest::slot_startDownload(int id, QString fileName)
+void GitlabRequest::slot_startDownload(int id, QString fileName, QString baseFolder)
 {
-    m_currentDownloads.clear();
     QUrl url(m_gitlabHome + "/api/v4/groups/" + QString::number(id) + "/projects");
-    QString tmp_folder = ".tmp_" + QFileInfo(fileName).baseName();
-
+    QString tmp_folder = baseFolder + QFileInfo(fileName).baseName();
     QUrlQuery query;
     query.addQueryItem("private_token", m_private_token);
+    query.addQueryItem("per_page", "1000");
     url.setQuery(query);
     QNetworkRequest request(url);
     QNetworkReply* reply = m_manager->get(request);
@@ -179,15 +179,47 @@ void GitlabRequest::slot_startDownload(int id, QString fileName)
 
                     if(m_currentDownloads.empty())
                     {
-                        QString cmd = "zip -qq -r -j " + fileName + " " + tmp_folder;
-                        QProcess::execute(cmd.toStdString().c_str());
-                        QDir(tmp_folder).removeRecursively();
                         m_sem.release();
                     }
                 });
             }
         }
         reply->deleteLater();
+    });
+
+
+
+    QUrl urlSubGroup(m_gitlabHome + "/api/v4/groups/" + QString::number(id) + "/subgroups");
+
+    QUrlQuery querySubGroup;
+    querySubGroup.addQueryItem("private_token", m_private_token);
+    querySubGroup.addQueryItem("per_page", "1000");
+    urlSubGroup.setQuery(querySubGroup);
+    QNetworkRequest requestSubGroup(urlSubGroup);
+    QNetworkReply* replySubGroup = m_manager->get(requestSubGroup);
+    connect(replySubGroup, &QNetworkReply::finished, [=]() {
+        if (replySubGroup->error() == QNetworkReply::NoError)
+        {
+            QByteArray response = replySubGroup->readAll();
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
+            QJsonArray jsonArray = jsonDoc.array();
+
+            for (const QJsonValue &value : jsonArray) {
+                QJsonObject obj = value.toObject();
+                int idGroup = obj["id"].toInt();
+                QString nameGroup = obj["name"].toString();
+                QString tmp_folder_subGroup = tmp_folder + "/";
+
+                QString tmp_folder2 = tmp_folder_subGroup + QFileInfo(nameGroup).baseName();
+                if(QDir(tmp_folder2).exists())
+                    QProcess::execute("rm -rf " + tmp_folder2);
+
+                QDir().mkdir(tmp_folder2);
+
+                slot_startDownload(idGroup, nameGroup, tmp_folder_subGroup);
+            }
+        }
+        replySubGroup->deleteLater();
     });
 }
 
@@ -203,13 +235,19 @@ void GitlabRequest::threadDownload()
         for(auto pair: queue)
         {
             qDebug() << "==> Start download group: " << pair.second;
-            QString tmp_folder = ".tmp_" + QFileInfo(pair.second).baseName();
+            QString tmp_folder = QFileInfo(pair.second).baseName();
             if(QDir(tmp_folder).exists())
                 QProcess::execute("rm -rf " + tmp_folder);
 
             QDir().mkdir(tmp_folder);
-            emit startDownload(pair.first, pair.second);
+            m_currentDownloads.clear();
+            emit startDownload(pair.first, pair.second, "./");
             m_sem.acquire();
+
+            QString cmd = "zip -qq -r " + pair.second + " " + tmp_folder;
+            system(cmd.toStdString().c_str());
+
+            QDir(tmp_folder).removeRecursively();
             qDebug() << "==> Downloaded success group: " << pair.second;
         }
 

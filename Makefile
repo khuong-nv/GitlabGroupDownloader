@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = GitlabGroupDownloader1.0.0
-DISTDIR = /home/khuongnv/Desktop/GitlabGroupDownloader/BUILD/GitlabGroupDownloader1.0.0
+DISTDIR = /home/khuongnv/GitlabGroupDownloader/BUILD/GitlabGroupDownloader1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/opt/Qt5.14.2/5.14.2/gcc_64/lib
 LIBS          = $(SUBLIBS) /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Quick.so /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Widgets.so /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Gui.so /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5QmlModels.so /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Qml.so /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Network.so /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Core.so -lGL -lpthread   
@@ -237,6 +237,7 @@ DIST          = /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -436,6 +437,7 @@ Makefile: GitlabGroupDownloader.pro /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g+
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -621,6 +623,7 @@ Makefile: GitlabGroupDownloader.pro /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g+
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/toolchain.prf:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/default_pre.prf:
@@ -691,21 +694,21 @@ compiler_qmlcache_clean:
 	-$(DEL_FILE) qml_Login_qml.cpp qml_main_qml.cpp qml_Home_qml.cpp
 qml_Login_qml.cpp: qml/Login.qml \
 		/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen --resource=/home/khuongnv/Desktop/GitlabGroupDownloader/qml.qrc -o qml_Login_qml.cpp qml/Login.qml
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen --resource=/home/khuongnv/GitlabGroupDownloader/qml.qrc -o qml_Login_qml.cpp qml/Login.qml
 
 qml_main_qml.cpp: qml/main.qml \
 		/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen --resource=/home/khuongnv/Desktop/GitlabGroupDownloader/qml.qrc -o qml_main_qml.cpp qml/main.qml
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen --resource=/home/khuongnv/GitlabGroupDownloader/qml.qrc -o qml_main_qml.cpp qml/main.qml
 
 qml_Home_qml.cpp: qml/Home.qml \
 		/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen --resource=/home/khuongnv/Desktop/GitlabGroupDownloader/qml.qrc -o qml_Home_qml.cpp qml/Home.qml
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen --resource=/home/khuongnv/GitlabGroupDownloader/qml.qrc -o qml_Home_qml.cpp qml/Home.qml
 
 compiler_qmlcache_loader_make_all: qmlcache_loader.cpp
 compiler_qmlcache_loader_clean:
 	-$(DEL_FILE) qmlcache_loader.cpp
 qmlcache_loader.cpp: qml.qrc /opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen --resource-file-mapping=/home/khuongnv/Desktop/GitlabGroupDownloader/qml.qrc=/home/khuongnv/Desktop/GitlabGroupDownloader/qml_qmlcache.qrc -o qmlcache_loader.cpp qml.qrc
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/qmlcachegen --resource-file-mapping=/home/khuongnv/GitlabGroupDownloader/qml.qrc=/home/khuongnv/GitlabGroupDownloader/qml_qmlcache.qrc -o qmlcache_loader.cpp qml.qrc
 
 compiler_rcc_make_all: BUILD/qrc_qml_qmlcache.cpp
 compiler_rcc_clean:
@@ -833,7 +836,7 @@ BUILD/moc_GitlabRequest.cpp: GitlabRequest.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qwaitcondition.h \
 		BUILD/moc_predefs.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/khuongnv/Desktop/GitlabGroupDownloader/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/khuongnv/Desktop/GitlabGroupDownloader -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQmlModels -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQml -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2/QtCore -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include GitlabRequest.h -o BUILD/moc_GitlabRequest.cpp
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/khuongnv/GitlabGroupDownloader/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/khuongnv/GitlabGroupDownloader -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQmlModels -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQml -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2/QtCore -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include GitlabRequest.h -o BUILD/moc_GitlabRequest.cpp
 
 BUILD/moc_fileopendialog.cpp: fileopendialog.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick/QQuickItem \
@@ -1034,7 +1037,7 @@ BUILD/moc_fileopendialog.cpp: fileopendialog.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/QKeySequence \
 		BUILD/moc_predefs.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/khuongnv/Desktop/GitlabGroupDownloader/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/khuongnv/Desktop/GitlabGroupDownloader -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQmlModels -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQml -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2/QtCore -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include fileopendialog.h -o BUILD/moc_fileopendialog.cpp
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/khuongnv/GitlabGroupDownloader/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/khuongnv/GitlabGroupDownloader -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQmlModels -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQml -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2/QtCore -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include fileopendialog.h -o BUILD/moc_fileopendialog.cpp
 
 BUILD/moc_filesavedialog.cpp: filesavedialog.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick/QQuickItem \
@@ -1235,7 +1238,7 @@ BUILD/moc_filesavedialog.cpp: filesavedialog.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/QKeySequence \
 		BUILD/moc_predefs.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/khuongnv/Desktop/GitlabGroupDownloader/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/khuongnv/Desktop/GitlabGroupDownloader -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQmlModels -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQml -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2/QtCore -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include filesavedialog.h -o BUILD/moc_filesavedialog.cpp
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/khuongnv/GitlabGroupDownloader/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/khuongnv/GitlabGroupDownloader -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/5.14.2/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQmlModels -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQml -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2 -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/5.14.2/QtCore -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include filesavedialog.h -o BUILD/moc_filesavedialog.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:

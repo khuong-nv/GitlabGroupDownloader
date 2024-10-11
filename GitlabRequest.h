@@ -98,13 +98,13 @@ public:
     Q_INVOKABLE void setGitlabInfo(QString gitlabHome, QString privateToken);
     Q_INVOKABLE void requestGroups();
 signals:
-     void startDownload(int id, QString fileName);
+     void startDownload(int id, QString fileName, QString baseFolder);
      void accessError(QString error);
      void accessSuccess(QString username);
      void downloadSuccess();
 
 public slots:
-     void slot_startDownload(int id, QString fileName);
+     void slot_startDownload(int id, QString fileName, QString baseFolder);
 private:
      void threadDownload();
 private:
