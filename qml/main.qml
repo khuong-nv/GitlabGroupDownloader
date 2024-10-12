@@ -34,5 +34,22 @@ ApplicationWindow {
             login.visible = true
             home.visible = false
         }
+
+        onOpenSettings: {
+            config.visible = true
+            home.visible = false
+        }
+    }
+
+    Config {
+        id: config
+        visible: false
+        anchors.centerIn: parent
+        anchors.fill: parent
+
+        onBack: {
+            home.visible = true
+            config.visible = false
+        }
     }
 }

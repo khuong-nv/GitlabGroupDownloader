@@ -7,6 +7,7 @@ import MyModules 1.0
 Item {
 
     signal back()
+    signal openSettings()
 
     property alias username: username.text
     ColumnLayout {
@@ -83,6 +84,7 @@ Item {
                     timer.running = false
                     btnBack.enabled = false
                     btnRefresh.enabled = false
+                    btnConfig.enabled = false
                 }
                 onDownloadSuccess: {
                     myText.color = "green"
@@ -91,6 +93,7 @@ Item {
                     timer.running = true
                     btnBack.enabled = true
                     btnRefresh.enabled = true
+                    btnConfig.enabled = true
                 }
             }
         }
@@ -99,7 +102,7 @@ Item {
             id: saveFile
             title: "Save file"
             filename: "download.zip"
-            nameFilters: ["Images (*.zip)", "All files (*)"]
+            nameFilters: ["Archive (*.7z)", "All files (*)"]
 
             property string gitlab_url: ""
             property int gitlab_group_id: 0
@@ -107,7 +110,7 @@ Item {
 
             function saveWithDefaultName(url, id, name) {
                 console.log("Download url: ", url)
-                filename = name + ".zip"
+                filename = name + ".7z"
                 gitlab_url = url
                 gitlab_group_id = id
                 saveFile.open()
@@ -156,6 +159,20 @@ Item {
                 onClicked: {
                     GitlabRequest.requestGroups()
                 }
+            }
+
+            Button {
+                id: btnConfig
+                font.pointSize: 16
+                Layout.margins: 5
+                Layout.fillWidth: false
+                text: qsTr("Settings")
+                Layout.fillHeight: false
+                Layout.columnSpan: 1
+                transformOrigin: Item.Center
+                icon.source: "qrc:/icons/icons8-settings-50.png"
+
+                onClicked: openSettings()
             }
 
             Rectangle {

@@ -244,10 +244,21 @@ void GitlabRequest::threadDownload()
             emit startDownload(pair.first, pair.second, "./");
             m_sem.acquire();
 
-            QString cmd = "zip -qq -r " + pair.second + " " + tmp_folder;
+            QSettings settings(".gdm_config", QSettings::IniFormat);
+            QString password = settings.value("default_password_7z").toString();
+
+
+//            QString cmd = "zip -qq -r " + pair.second + " " + tmp_folder;
+            if(QFile(pair.second).exists())
+            {
+                QFile(pair.second).remove();
+            }
+
+            QString cmd = QString("7z a -sdel %1 %2 %3").arg(password.isEmpty() ? "" : ("-mhe=on -p" + password)).arg(pair.second).arg(tmp_folder);
+            qDebug() << "CMD:" << cmd;
             system(cmd.toStdString().c_str());
 
-            QDir(tmp_folder).removeRecursively();
+//            QDir(tmp_folder).removeRecursively();
             qDebug() << "==> Downloaded success group: " << pair.second;
         }
 
