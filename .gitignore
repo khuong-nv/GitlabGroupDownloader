@@ -2,3 +2,4 @@ BUILD
 .gdm_config
 *.user
 .qmake.stash
+Makefile
